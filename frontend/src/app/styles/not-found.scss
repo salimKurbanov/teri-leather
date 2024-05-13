@@ -1,0 +1,23 @@
+@import './common.scss';
+
+.not-found {
+    width: 100%;
+    min-height: 100dvh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+    & img {
+        width: 200px;
+    }
+    .title {
+        @include adaptiveFont(120, 100);
+        color: $orange;
+        font-weight: 800;
+    }
+    & p {
+        color: #fff;
+        @include adaptiveFont(20, 18);
+    }
+}

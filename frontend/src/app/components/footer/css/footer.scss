@@ -1,0 +1,151 @@
+@import './../../../styles/common.scss';
+
+/*----------Иконочный шрифт--------------*/
+@font-face {
+    font-family: 'footer_font';
+    src:  url('../fonts/footer_font.eot?cup7yv');
+    src:  url('../fonts/footer_font.eot?cup7yv#iefix') format('embedded-opentype'),
+      url('../fonts/footer_font.ttf?cup7yv') format('truetype'),
+      url('../fonts/footer_font.woff?cup7yv') format('woff'),
+      url('../fonts/footer_font.svg?cup7yv#footer_font') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: block;
+  }
+  
+  [class^="footer_icon_"], [class*=" footer_icon_"] {
+    /* use !important to prevent issues with browser extensions that change fonts */
+    font-family: 'footer_font' !important;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+  
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  .footer_icon_inst:before {
+    content: "\e900";
+    font-size: 40px;
+    &:hover{
+        color: $orange;
+    }
+
+  }
+  .footer_icon_tg:before {
+    content: "\e901";
+    font-size: 40px;
+    &:hover{
+        color: $orange;
+    }
+
+  }
+  .footer_icon_vk:before {
+    content: "\e902";
+    font-size: 50px;
+    &:hover{
+        color: $orange;
+    }
+  }
+  .footer_icon_wapp:before {
+    content: "\e903";
+    font-size: 47px;
+    &:hover{
+        color: $orange;
+    }
+  }
+  
+/*-----------------*/
+footer{
+    padding-bottom: 100px;
+    @include adaptiveProperty(margin-top, 200, 100);
+    @include mediaMinWidth(769){ 
+        padding-right: 100px;   
+    }
+}
+.footer_block{
+    padding: 0 15px;
+    width: 100%;
+    min-height: 40dvh;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 45px;
+    nav {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        justify-content: center;
+        flex-wrap: wrap;
+        & a{
+            font-size: 17px;
+            transition: 0.3s;
+            color: #fff;
+            &:hover{
+                color: $orange;
+            }
+            @include mediaMaxWidth(440){
+                font-size: 22px;
+            }
+        }
+        @include mediaMaxWidth(440){
+            flex-direction: column;
+        }
+    }
+    .logo{
+        height: auto;
+        width: 60px;
+    }
+    .social{
+        display: flex;
+        align-items: center;
+        gap: 30px;
+        & a {
+            display: block;
+            color: #fff;
+            transition: 0.3s;
+            &:hover{
+                color: $orange;
+            }
+        }
+    }
+    .policy_block{
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        justify-content: center;
+        flex-wrap: wrap;
+        text-align: center;
+        .policy_item{
+            color: #fff;
+            transition: 0.3s;
+            &:hover{
+                color: $orange;
+            }
+            @include mediaMaxWidth(440){
+                font-size: 20px;
+            }
+        }
+    }
+    .line{
+        width: 80%;
+        height: 3px;
+        background: $orange;
+    }
+    .copyright{
+        text-transform: capitalize;
+        font-size: 14px;
+        color: #fff;
+        //opacity: 0.5;
+    }
+    .cookie_notice{
+        font-size: 12px;
+        color: #fff;
+        opacity: 0.5;
+        text-align: center;
+    }
+}
+  

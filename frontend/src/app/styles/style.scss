@@ -1,0 +1,398 @@
+@import './common.scss';
+
+@font-face {
+    font-family: 'geared_slab';
+    src: url('./../fonts/GearedSlab-Regular.woff'),
+    url('./../fonts/GearedSlab-Regular.woff2');
+}
+
+/*Обнуление*/
+*{
+	padding: 0;
+	margin: 0;
+	border: 0;
+}
+*,*:before,*:after{
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+}
+:focus,:active{outline: none;}
+a:focus,a:active{outline: none;}
+
+nav,footer,header{display: block;}
+[inert], [inert] * {opacity: 0.3;}
+
+html,body{
+	height: 100%;
+	width: 100dvw;
+	min-width: 320px;
+	font-size: 100%;
+	font-weight: 400;
+	line-height: 1.5;
+	font-size: 1rem;
+	-ms-text-size-adjust: 100%;
+	-moz-text-size-adjust: 100%;
+	-webkit-text-size-adjust: 100%;
+	scroll-behavior: smooth;
+}
+input,button,textarea{font-family:inherit;}
+
+input::-ms-clear{display: none;}
+button{cursor: pointer;background: transparent}
+button::-moz-focus-inner {padding:0;border:0;background: transparent}
+a, a:visited{text-decoration: none;}
+a:hover{text-decoration: none;}
+ul li{list-style: none;}
+img{vertical-align: top;}
+
+h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight: 400;}
+body{
+    background: #131313;
+    color: #fff;
+}
+html.hidden{
+    overflow: hidden;
+}
+body.hidden{
+    padding-right: 16px;
+    overflow-y: hidden;
+}
+::-webkit-scrollbar {
+    width: 0px;
+    background: black;
+}
+.os-scrollbar {
+    z-index: 100;
+    --os-track-bg: none;
+    --os-track-bg-hover: none;
+    --os-track-bg-active: none;
+    --os-handle-bg: rgba(255, 165, 0, 0.5);
+    --os-handle-bg-hover: rgba(255, 165, 0, 1);
+    --os-handle-bg-active: orange;
+    @media screen and (max-width: 768px) {
+        display: none;
+    }
+}
+/*-----------------*/
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:active,
+input:-webkit-autofill:focus {
+    background-color: #131313 !important;
+    color: white !important;
+    -webkit-box-shadow: 0 0 0 1000px #131313 inset !important;
+    -webkit-text-fill-color: white !important;
+    transition: background-color 0s 600000s, color 0s 600000s;
+    caret-color: white;
+}
+/*-------------------------------*/
+@font-face {
+    font-family: 'icomoon';
+    src:  url('./../fonts/icomoon.eot?ymp2bg');
+    src:  url('./../fonts/icomoon.eot?ymp2bg#iefix') format('embedded-opentype'),
+      url('./../fonts/icomoon.ttf?ymp2bg') format('truetype'),
+      url('./../fonts/icomoon.woff?ymp2bg') format('woff'),
+      url('./../fonts/icomoon.svg?ymp2bg#icomoon') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: block;
+  }
+  
+  [class^="icon_"], [class*=" icon_"] {
+    /* use !important to prevent issues with browser extensions that change fonts */
+    font-family: 'icomoon' !important;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+  
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  .icon_cart:before {
+    content: "\e907";
+  }
+  .icon_profile:before {
+    content: "\e908";
+  }
+  .icon_search:before {
+    content: "\e909";
+  }
+  .icon_arrow-right:before {
+    content: "\e902";
+  }
+  .icon_moon:before {
+    content: "\e900";
+  }
+  .icon_arrow-down:before {
+    content: "\e901";
+  }
+  .icon_sun:before {
+    content: "\e903";
+  }
+  .icon_telegram:before {
+    content: "\e904";
+  }
+  .icon_vk:before {
+    content: "\e905";
+  }
+  .icon_vk1:before {
+    content: "\e906";
+  }
+  .icon_instagram:before {
+    content: "\ea92";
+  }
+  
+/*-----------------check-box------------------*/
+.registration_checkbox {
+  position: absolute;
+  z-index: -1;
+  opacity: 0;
+}
+.registration_checkbox+label {
+  display: inline-flex;
+  align-items: center;
+  user-select: none;
+}
+.registration_checkbox+label:before {
+  content: '';
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  margin: 10px 0 0 5px;
+  border: 1px solid orange;
+  border-radius: 5px;
+  margin: 0;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 50% 50%;
+}
+.registration_checkbox:checked+label:before {
+  border-color: orange;
+  background-color: orange;
+  //background-image: url();
+  background-size: cover;
+}
+/*---------------------loader*-----------------------*/
+
+#loader{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #131313;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 500;
+    text-align: center;
+    transition: 1.5s cubic-bezier(0.77, 0, 0.175, 1);
+    &.down{
+        top: 100%;
+    }
+}
+.loader_title{
+    position: relative;
+    font-family: 'geared_slab';
+    text-transform: none;
+    font-weight: 500;
+    width: max-content;
+    color: orange;
+    font-size: 50px;
+    white-space: nowrap;
+}
+#login_loader{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: orange;
+    display: none;
+    &.active{
+        display: block;
+    }
+}
+.circle_login{
+    fill: transparent;
+    stroke: #575757;
+    stroke-width: 2px;
+    stroke-linecap: butt;
+    stroke-dasharray: 45px;
+    stroke-dashoffset: 5px;
+    transform-origin: center;
+    animation: circle_main 2s infinite;
+}
+.circle_main{
+    fill: transparent;
+    stroke: orange;
+    stroke-width: 5px;
+    stroke-linecap: butt;
+    stroke-dasharray: 300px;
+    stroke-dashoffset: 100px;
+    transform-origin: center;
+    animation: circle_main 2s infinite;
+}
+.circle_inherit{
+    fill: transparent;
+    stroke: #575757;
+    stroke-width: 5px;
+    stroke-linecap: butt;
+    stroke-dasharray: 250px;
+    stroke-dashoffset: 90px;
+    transform: rotate(-90deg);
+    transform-origin: center;
+    animation: circle_inherit 2s infinite;
+}
+@keyframes circle_main {
+    0%{
+        transform: rotate(0deg);
+    }
+    50%{
+        transform: rotate(360deg);
+    }
+    100%{
+        transform: rotate(0deg);
+    }
+}
+
+@keyframes circle_inherit {
+    0%{
+        transform: rotate(-90deg);
+    }
+    50%{
+        transform: rotate(-450deg);
+    }
+    100%{
+        transform: rotate(-90deg);
+    }
+}
+/*------------Основные элементы----------------*/
+.circle {
+  transform: rotate(-90deg);
+  fill: transparent;
+  stroke: orange;
+  stroke-width: 4px;
+  stroke-linecap: butt;
+  stroke-dasharray: 214;
+  stroke-dashoffset: calc(214 - (214 * 60) / 100);
+  transform-origin: center;
+  animation: Spinner 0.5s infinite linear;
+}
+@keyframes Spinner {
+0% {
+  transform: rotate(0);
+}
+100% {
+  transform: rotate(360deg);
+}
+}
+.main_message {
+  position: fixed;
+  bottom: 20px;
+  right: 100px;
+  width: max-content;
+  height: auto;
+  z-index: 99;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  @include mediaMaxWidth(768) {
+    right: 0;
+  }
+  p {
+    display: block;
+    padding: 10px 40px;
+    width: max-content;
+    color: #131313;
+    font-weight: 600;
+    font-size: 16px;
+    position: relative;
+    transition: 1s;
+    background-color: $orange;
+    border-right: 0;
+    &.remove {
+      animation: backSlice 0.5s forwards ease;
+    }
+    animation: Slice 0.5s forwards ease;
+    overflow: hidden;
+  }
+}
+
+@keyframes backSlice {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(calc(100% + 10px));
+  }
+}
+
+@keyframes Slice {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
+.main_button {
+  color: white;
+  border: 2px solid orange;
+  background: transparent;
+  @include adaptiveProperty(padding-top, 10, 7);
+  @include adaptiveProperty(padding-bottom, 10, 7);
+  @include adaptiveProperty(padding-left, 80, 40);
+  @include adaptiveProperty(padding-right, 80, 40);
+  @include adaptiveFont(18, 14);
+  width: max-content;
+  transition: 0.3s;
+  text-align: center;
+  font-weight: 800;
+  &.white {
+    color: #fff;
+    border: 2px solid white;
+  }
+  &.cross {
+    padding: 5px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  & a {
+      text-decoration: none;
+      color: white;
+      transition: 0.3s;
+  }
+  @include mediaMinWidth(993) {
+    &:hover {
+        color: #131313;
+        background: orange;
+        & a {
+            color: #131313;
+        }
+    }
+  }
+  @include mediaMaxWidth(992) {
+    &:active {
+        color: #131313;
+        background: orange;
+        & a {
+            color: #131313;
+        }
+    }
+  }
+}
+.main_container {
+  position: relative;
+  width: 100%;
+  padding: 150px 120px 20px 20px;
+}

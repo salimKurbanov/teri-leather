@@ -1,0 +1,35 @@
+'use client'
+
+import { useEffect, useState } from "react";
+import Store from './../../../store/Store';
+import CatalogMenu from "./CatalogMenu.js";
+import ProfileMenu from "./ProfileMenu";
+
+
+export default function SideMenu() {
+
+    const [modalValue, setModalValue] = useState('')
+
+    Store.useListener('modal', setModalValue) 
+
+    function closeMenu() {
+        document.querySelector('.side_menu').classList.remove('active');
+    }
+
+    useEffect(() => {
+
+        window.addEventListener('click', () => {
+            document.querySelector('.side_menu').classList.remove('active');
+        })
+
+    }, [])
+    
+
+    return (
+        <div className="side_menu" onClick={(e) => e.stopPropagation()}>
+            <div className="close_side" onClick={closeMenu}>X</div>
+            {modalValue === 'catalog' && <CatalogMenu />}
+            {modalValue === 'profile' && <ProfileMenu />}
+        </div>
+    );
+}
