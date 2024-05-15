@@ -4,16 +4,20 @@ import { useEffect, useState } from "react";
 import Basket from "@/Basket/Basket";
 import Spinner from "../Spinner";
 import BasketMenuItem from "./BasketMenuItem";
+import Store from "@/store/Store";
 
 export default function BasketMenu() {
 
     const [basket, setBasket] = useState(false)
+    let [reren, setReren] = useState(false)
+
+    Store.useListener('reren', setReren)
 
     useEffect(() => {
 
         Basket.getApi(setBasket)
 
-    }, [])
+    }, [reren])
 
     return (
         <div className="basket_menu_block">
