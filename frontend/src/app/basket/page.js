@@ -9,17 +9,21 @@ import Basket from '@/Basket/Basket';
 import BasketExec from './components/BasketExec';
 import TotalPrice from './components/TotalPrice';
 import Spinner from '../components/Spinner';
+import Store from '@/store/Store';
 
 
 export default function BasketPage() {
 
     const [basket, setBasket] = useState(false)
+    let [rerender, setRerender] = useState(false)
+
+    Store.useListener('rerender', setRerender)
 
     useEffect(() => {
 
         Basket.getApi(setBasket)
 
-    }, [])
+    }, [rerender])
 
     return (
         <div className="basket_block main_container">
@@ -28,11 +32,12 @@ export default function BasketPage() {
             </div>
             {basket ?
                 <>
-                    {basket.length > 0 ? 
+                    {basket.length > 0 ?
                         <div className="basket_flex">
 
                             <div className="basket_content">
-                                <Count />
+                                <p className="product_amount">Товаров: <Count /></p>
+                                
                                 <TotalPrice basket={basket}/>
                                 <div className="basket_list">
 

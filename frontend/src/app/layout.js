@@ -1,4 +1,4 @@
-import { Comfortaa } from "next/font/google";
+import { Comfortaa, Inter } from "next/font/google";
 import './styles/style.scss';
 import Header from "./components/Header";
 import Footer from "./components/footer/Footer";
@@ -6,7 +6,7 @@ import Aside from "./components/Aside";
 import SideMenu from "./components/menu/SideMenu";
 import Message from "./components/Message";
 
-const inter = Comfortaa({ subsets: ["latin"] });
+const inter = Comfortaa({ subsets: ["latin"], display: "swap", });
 
 export const metadata = {
   title: "Teri Leather | Официальный сайт | Интернет-магазин | Teri Leather",
@@ -21,10 +21,8 @@ export default function RootLayout({ children }) {
           <Aside />
           <SideMenu />
           <Header/>
-
-          {children}
-          
           <Message />
+          {children}
 
           <Footer />
         

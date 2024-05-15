@@ -9,9 +9,10 @@ header {
     justify-content: space-between;
     gap: 20px;
     width: 100%;
-    align-items: baseline;
+    align-items: center;
     z-index: 20;
     .logo {
+        width: max-content;
         font-family: 'geared_slab';
         @include adaptiveFont(30, 25);
         color: $orange;
@@ -22,12 +23,14 @@ header {
         justify-content: flex-end;
         gap: 20px;
         .link {
+            position: relative;
             color: white;
             //text-transform: uppercase;
             @include adaptiveFont(16, 14);
             font-weight: 600;
             opacity: 0.5;
             transition: 0.3s;
+            
             &:hover {
                 opacity: 1;
                 color: $orange;
@@ -52,6 +55,27 @@ header {
     width: 100px;
     height: 100dvh;
     z-index: 100;
+    .cart {
+        position: relative;
+        .count {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            z-index: 10;
+            color: #131313;
+            border-radius: 50%;
+            background-color: $orange;
+            width: max-content;
+            min-width: 15px;
+            height: 15px;
+            font-size: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            line-height: normal;
+            font-weight: 700;
+        }
+    }
     @include mediaMaxWidth(768){
         display: none;
     }
@@ -142,6 +166,7 @@ header {
     color: white;
     transform: translateX(100%);
     transition: 0.5s;
+    overflow: auto;
     &.active{
         transform: translateX(0);
     }
@@ -173,6 +198,21 @@ header {
     }
     @include mediaMaxWidth(768) {
         display: none;
+    }
+}
+/*--------- Basket menu -----------*/
+.basket_menu_block {
+    .title {
+        margin-top: 15px;
+    }
+    .basket_empty {
+        min-height: 60dvh;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        gap: 20px;
     }
 }
 /*----------Catalog menu-----------*/

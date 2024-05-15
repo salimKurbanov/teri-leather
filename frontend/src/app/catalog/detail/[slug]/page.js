@@ -50,7 +50,7 @@ export default async function productDetail({params}) {
 
             <SimilarList id={product.id}/>
             <ViewsList id={product.id}  />
-            <ImagePopUp Image1={product.Image1} Image2={product.Image2} Image3={product.Image3} Image4={product.Image4} Image5={product.Image5}/>
+            <ImagePopUp images={[product.Image1, product.Image2, product.Image3, product.Image4, product.Image5]}/>
         </div>
     );
 }

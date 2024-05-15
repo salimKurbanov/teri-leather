@@ -2,7 +2,7 @@ import MainSlider from "./MainSlider";
 
 import { Oswald } from "next/font/google";
 
-const oswaldFont = Oswald({subsets: ["latin"], variable: '--font-oswald' });
+const oswaldFont = Oswald({subsets: ["latin"], variable: '--font-oswald', display: "swap", });
 
 export default function Main() {
     return (

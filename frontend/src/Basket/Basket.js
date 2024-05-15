@@ -78,9 +78,12 @@ Basket.count = () => {
     let basket = Basket.get()
     let count = 0
 
-    for (let i of basket) {
-        count += i.count
+    if(basket) {
+        for (let i of basket) {
+            count += i.count
+        }
     }
+    
 
     return count
 }

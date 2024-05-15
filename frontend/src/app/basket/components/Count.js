@@ -13,8 +13,8 @@ export default function Count() {
     useEffect(() => {
 
         setCount(Basket.count())
-        
+
     }, [])
 
-    return <p className="product_amount">Товаров: {count}</p>
+    return <>{count}</>
 };

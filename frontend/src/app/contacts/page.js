@@ -8,7 +8,7 @@ export default function Contacts() {
     return (
         <div className="contacts">
             <div className="contacts_map" id="map-block">
-                <iframe src="https://yandex.ru/map-widget/v1/?um=constructor%3A5c581effa8c91237cab033f931ab1658ea589b78eb9e77784cdbf099e8e0e92a&amp;source=constructor" frameborder="0"></iframe>
+                <iframe src="https://yandex.ru/map-widget/v1/?um=constructor%3A5c581effa8c91237cab033f931ab1658ea589b78eb9e77784cdbf099e8e0e92a&amp;source=constructor" frameBorder="0"></iframe>
                 <CloseBtn />
             </div>
             <div className="contacts_container">

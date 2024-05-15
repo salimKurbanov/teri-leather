@@ -6,6 +6,7 @@ import Logo from './../../../public/LogoTeri_orange.png'
 import Image from 'next/image';
 import Store from './../../store/Store.js';
 import { useEffect, useState } from 'react';
+import ManiCount from './MainCount';
 
 const Aside = () => {
 
@@ -25,7 +26,9 @@ const Aside = () => {
     return (
             <div className='aside' onClick={(e) => e.stopPropagation()}>
                 <nav>
-                    <div className='icon_cart' onClick={(e) => modalValue(e, 'cart')}></div>
+                    <div className='icon_cart cart' onClick={(e) => modalValue(e, 'cart')}>
+                        <ManiCount />
+                    </div>
                     <div className='icon_profile' onClick={(e) => modalValue(e, 'profile')}></div>
                     <div className='icon_search' onClick={(e) => modalValue(e, 'search')}></div>
                 </nav>

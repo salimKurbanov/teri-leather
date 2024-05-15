@@ -4,6 +4,7 @@ import Link from 'next/link';
 import './css/components.scss'
 import { usePathname } from 'next/navigation';
 
+
 export default function Header() {
 
     const path = usePathname()

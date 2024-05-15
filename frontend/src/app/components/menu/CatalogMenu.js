@@ -29,7 +29,7 @@ export default function CatalogMenu() {
                     <Link href={`/catalog/new`} className={path == `/catalog/new` ? 'active': ''}>Новинки</Link>
                     <Link href={`/catalog/popular`} className={path == `/catalog/popular` ? 'active': ''}>Популярные</Link>
                     {tabs.map((el) => (
-                        <Link href={`/catalog/${el.slug}`} key={el.id} className={path == `/catalog/${el.slug}` ? 'active': ''} onClick={closeMenu()}>{el.categories_plural}</Link>
+                        <Link href={`/catalog/${el.slug}`} key={el.id} className={path == `/catalog/${el.slug}` ? 'active': ''} >{el.categories_plural}</Link>
                     ))}
                 </div>
             </div>
