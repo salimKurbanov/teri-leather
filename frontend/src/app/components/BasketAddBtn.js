@@ -1,6 +1,5 @@
 'use client'
 import Basket from "@/Basket/Basket";
-import { createElement } from "react";
 import Store from "@/store/Store";
 
 export default function BasketAddBtn({id, price}) {
@@ -19,6 +18,7 @@ export default function BasketAddBtn({id, price}) {
         }, 3000)
         
         Store.setListener('count_main', Basket.count())
+        Store.setListener('rerend', prev => !prev)
     }
 
     return (

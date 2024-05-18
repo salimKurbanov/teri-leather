@@ -15,12 +15,14 @@ export default function SideMenu() {
 
     function closeMenu() {
         document.querySelector('.side_menu').classList.remove('active');
+        document.body.style.overflow = 'visible'
     }
 
     useEffect(() => {
 
         window.addEventListener('click', () => {
             document.querySelector('.side_menu').classList.remove('active');
+            document.body.style.overflow = 'visible'
         })
 
     }, [])

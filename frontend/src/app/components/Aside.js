@@ -7,8 +7,12 @@ import Image from 'next/image';
 import Store from './../../store/Store.js';
 import { useEffect, useState } from 'react';
 import ManiCount from './MainCount';
+import { usePathname } from 'next/navigation';
+import Link from 'next/link';
 
 const Aside = () => {
+
+    let path = usePathname()
 
     const [btn, setBtn] = useState('')
 
@@ -17,8 +21,10 @@ const Aside = () => {
         Store.setListener('modal', el)
         if(btn === e.target && sideMenu.classList.contains('active')) {
             sideMenu.classList.remove('active')
+            document.body.style.overflow = 'visible'
         } else {
             sideMenu.classList.add('active')
+            document.body.style.overflow = 'hidden'
             setBtn(e.target)
         }
     }
@@ -26,9 +32,15 @@ const Aside = () => {
     return (
             <div className='aside' onClick={(e) => e.stopPropagation()}>
                 <nav>
-                    <div className='icon_cart cart' onClick={(e) => modalValue(e, 'cart')}>
-                        <ManiCount />
-                    </div>
+                    {path == '/basket' ? 
+                        <Link className='icon_cart cart' href={'/basket'}>
+                            <ManiCount />
+                        </Link>
+                        :
+                        <div className='icon_cart cart' onClick={(e) => modalValue(e, 'cart')}>
+                            <ManiCount />
+                        </div>
+                    }
                     <div className='icon_profile' onClick={(e) => modalValue(e, 'profile')}></div>
                     <div className='icon_search' onClick={(e) => modalValue(e, 'search')}></div>
                 </nav>

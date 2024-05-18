@@ -62,21 +62,19 @@ export default function BasketItem({product}) {
 
     function removeBasketItem(id) {
 
-        const items = document.querySelectorAll(`[data-id='${id}']`)
+        const items = document.querySelector(`[data-id='${id}']`)
 
         if(items) {
-            items.forEach(element => {
-                element.classList.add('red')
-                setTimeout(() => {
-                    element.classList.add('remove')
-                }, 500)
-                setTimeout(() => {
-                    element.classList.add('height')
-                }, 1300)
-                setTimeout(() => {
-                    element.remove()
-                }, 2500)
-            });
+            items.classList.add('red')
+            setTimeout(() => {
+                items.classList.add('remove')
+            }, 500)
+            setTimeout(() => {
+                items.classList.add('height')
+            }, 1300)
+            setTimeout(() => {
+                items.remove()
+            }, 2500)
         }
 
         Basket.remove(id)

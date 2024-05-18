@@ -166,7 +166,7 @@ header {
     color: white;
     transform: translateX(100%);
     transition: 0.5s;
-    overflow: auto;
+    overflow: hidden;
     &.active{
         transform: translateX(0);
     }
@@ -187,6 +187,7 @@ header {
         font-size: 20px;
         font-weight: 700;
         cursor: pointer;
+        z-index: 11;
     }
     @keyframes appear {
         from{
@@ -202,8 +203,26 @@ header {
 }
 /*--------- Basket menu -----------*/
 .basket_menu_block {
-    .title {
+    .title_menu {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 60px;
+        padding: 20px;
         margin-top: 15px;
+        background-color: #131313;
+        z-index: 10;
+    }
+    .basket_menu_futter {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        padding: 20px;
+        height: auto;
+        text-align: center;
+        background-color: #131313;
     }
     .basket_empty {
         min-height: 60dvh;
@@ -215,11 +234,10 @@ header {
         gap: 20px;
     }
     .basket_menu_flex {
-        margin-top: 20px;
-        display: flex;
-        flex-direction: column;
-        gap: 0px;
-        height: auto;
+        height: 100dvh;
+        padding-top: 60px;
+        padding-bottom: 110px;
+        overflow: auto;
         .cross {
             position: absolute;
             top: 0;
@@ -305,6 +323,7 @@ header {
                     white-space: nowrap;
                     overflow: hidden;
                     font-size: 14px;
+                    width: max-content;
                     color: #fff;
                     transition: 0.3s;
                     margin-top: 0;

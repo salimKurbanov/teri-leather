@@ -9,6 +9,7 @@ import { usePathname } from "next/navigation"
 export default function BasketMenuItem({product}) {
 
     let [count, setCount] = useState(1)
+
     let path = usePathname() 
 
     useEffect(() => {
@@ -19,39 +20,25 @@ export default function BasketMenuItem({product}) {
     }, [])
 
     function removeBasketItem(id) {
-        const items = document.querySelectorAll(`[data-id='${id}']`)
+        const items = document.querySelector(`[data-menuid='${id}']`)
 
         if(items) {
-            items.forEach(element => {
-                element.classList.add('red')
-                setTimeout(() => {
-                    element.classList.add('remove')
-                }, 500)
-                setTimeout(() => {
-                    element.classList.add('height')
-                }, 1300)
-                setTimeout(() => {
-                    element.remove()
-                }, 2500)
-            });
+            items.classList.add('red')
+            setTimeout(() => {
+                items.classList.add('remove')
+            }, 500)
+            setTimeout(() => {
+                items.classList.add('height')
+            }, 1300)
+            setTimeout(() => {
+                items.remove()
+            }, 2500)
         }
        
         Basket.remove(id)
 
-        const count = Basket.count()
-
-        if(path == '/basket') {
-            if(count === 0) {
-                setTimeout(() => {
-                    Store.setListener('rerender', prev => !prev)
-                    Store.setListener('reren', prev => !prev)
-                }, 3000)
-                
-            }
-            Store.setListener('count', count)
-            Store.setListener('count_main', count)
-            Store.setListener('total_price', Basket.totalPrice())
-        }
+        const countBasket = Basket.count()
+        Store.setListener('count_main', countBasket)
 
         let p = document.createElement('p')
         p.textContent = 'Товар удалён из корзины'
@@ -64,10 +51,16 @@ export default function BasketMenuItem({product}) {
             }, 1500)
         }, 3000)
 
+        if(countBasket === 0) {
+            setTimeout(() => {
+                Store.setListener('rerend', prev => !prev)
+            }, 2400)
+        }
+
     }
 
     return (
-        <div className="basket_item_wrapper" data-id={product.id}>
+        <div className="basket_item_wrapper" data-menuid={product.id}>
             <div className="basket_menu_item" >
                 <span className="cross main_cross" onClick={() => removeBasketItem(product.id)}></span>
                 <Link href={`/catalog/detail/${product.slug}`} className="link_image">
@@ -82,6 +75,5 @@ export default function BasketMenuItem({product}) {
             </div>
             <div className="margin_btm"></div>
         </div>
-        
     );
 }
