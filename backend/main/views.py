@@ -7,7 +7,8 @@ from .serializers import ProductsSerializer, RecomendationsSerializer, ProductDe
 from rest_framework import generics, status
 from services.utils import get_client_ip
 from .utils import find_similar_products
-
+from users.models import CustomUser
+        
 
 class CategoriesListView(generics.ListAPIView):
 
@@ -152,3 +153,5 @@ class SimilarListView(generics.ListAPIView):
         queryset = find_similar_products(id)
 
         return queryset
+
+

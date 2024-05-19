@@ -1,7 +1,6 @@
 'use client'
 
 import Image from "next/image";
-import test from './../../../../public/test.jpg'
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import Basket from "@/Basket/Basket";
@@ -64,18 +63,16 @@ export default function BasketItem({product}) {
 
         const items = document.querySelector(`[data-id='${id}']`)
 
-        if(items) {
-            items.classList.add('red')
-            setTimeout(() => {
-                items.classList.add('remove')
-            }, 500)
-            setTimeout(() => {
-                items.classList.add('height')
-            }, 1300)
-            setTimeout(() => {
-                items.remove()
-            }, 2500)
-        }
+        items.classList.add('red')
+        setTimeout(() => {
+            items.classList.add('remove')
+        }, 500)
+        setTimeout(() => {
+            items.classList.add('height')
+        }, 1300)
+        setTimeout(() => {
+            items.remove()
+        }, 2500)
 
         Basket.remove(id)
 
@@ -99,9 +96,8 @@ export default function BasketItem({product}) {
         if(count === 0) {
             setTimeout(() => {
                 Store.setListener('rerender', prev => !prev)
-            }, 3001)
+            }, 2400)
         }
-
     }
 
     return (

@@ -3,14 +3,22 @@
 import { useState } from "react";
 import Login from "./Login";
 import Registration from "./Registration";
+import useAuth from "@/hooks/useAuth";
+import Profile from "./Profile";
 
 
 export default function ProfileMenu() {
 
     const [content, setContent] = useState('login')
 
+    let [auth] = useAuth()
+
     return (
         <div className='side_menu_content'>
+            {auth ? 
+            <Profile />
+            : 
+            <>
             <div className="profile_menu_tabs">
 
                 <h3 className={content === 'login' ? "profile_tab active" : 'profile_tab'}  onClick={() => {setContent('login')}}>
@@ -29,7 +37,9 @@ export default function ProfileMenu() {
 
             <div className={content === 'registration' ? 'profile_menu_content active' : 'profile_menu_content'}>
                 <Registration />
-            </div>
+            </div> 
+            </>
+            }
         </div>
     );
 }

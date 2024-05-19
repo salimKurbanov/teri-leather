@@ -15,3 +15,6 @@ class CustomUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = CustomUser
         fields = '__all__'
+
+class EmailVerifySerializer(serializers.Serializer):
+    email = serializers.EmailField()
