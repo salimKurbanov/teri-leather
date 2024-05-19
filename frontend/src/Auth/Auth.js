@@ -135,11 +135,9 @@ Auth.verify = (callback)=> {
     })
     .then(res => res.json())
     .then(data => {
-        console.log(data)
         if(data.code == 'token_not_valid') {
             Auth.refresh(callback)
         } else{
-            console.log('auth')
             callback(true)
         }
     } )
@@ -162,7 +160,6 @@ Auth.refresh = (callback)=> {
     })
     .then(res => res.json())
     .then(data => {
-        console.log(data)
         if(data.access) {
             localStorage.setItem('accessToken', data.access)
             callback(true)
