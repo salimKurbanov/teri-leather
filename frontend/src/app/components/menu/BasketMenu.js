@@ -1,44 +1,24 @@
 'use client'
 
-import { useEffect, useState } from "react";
-import Basket from "@/Basket/Basket";
 import Spinner from "../Spinner";
 import BasketMenuItem from "./BasketMenuItem";
-import Store from "@/store/Store";
 import Link from "next/link";
 
-export default function BasketMenu() {
-
-    const [basket, setBasket] = useState(false)
-    let [rerend, setRerend] = useState(false)
-
-    Store.useListener('rerend', setRerend)
-
-    function closeMenu() {
-        document.querySelector('.side_menu').classList.remove('active');
-        document.body.style.overflow = 'visible'
-    }
-
-    useEffect(() => {
-
-        Basket.getApi(setBasket)
-
-    }, [rerend])
-
+export default function BasketMenu({options}) {
     return (
         <div className="basket_menu_block">
             <h2 className="title_menu">Корзина</h2>
-            {basket ?
+            {options.load ?
                 <>
-                    {basket.length > 0 ?
+                    {options.basket?.length > 0 ?
                     <>
                         <div className="basket_menu_flex">
-                            {basket.map((e) => (
+                            {options.basket.map((e) => (
                                 <BasketMenuItem key={e.id} product={e}/>
                             ))}
                         </div>
                         <div className="basket_menu_futter">
-                            <Link onClick={closeMenu} href={'/basket'} className="main_button">Оформить заказ</Link>
+                            <Link onClick={options.closeMenu} href={'/basket'} className="main_button">Оформить заказ</Link>
                         </div>
                     </>
                     : 

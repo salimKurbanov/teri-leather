@@ -1,38 +1,26 @@
 'use client'
 
-import { useEffect, useState, useRef } from 'react';
 import BasketItem from './components/BasketItem';
 import './css/basket.scss';
-import Api from '@/Api/Api';
 import Count from './components/Count';
-import Basket from '@/Basket/Basket';
 import BasketExec from './components/BasketExec';
 import TotalPrice from './components/TotalPrice';
 import Spinner from '../components/Spinner';
-import Store from '@/store/Store';
+import useBasket from '@/hooks/useBasket';
 
 
 export default function BasketPage() {
 
-    const [basket, setBasket] = useState(false)
-    let [rerender, setRerender] = useState(false)
-
-    Store.useListener('rerender', setRerender)
-
-    useEffect(() => {
-
-        Basket.getApi(setBasket)
-
-    }, [rerender])
+    const { basket, setBasket, load } = useBasket()
 
     return (
         <div className="basket_block main_container">
             <div className="basket_title">
                 <h1>Коризна</h1>
             </div>
-            {basket ?
+            {load ?
                 <>
-                    {basket.length > 0 ?
+                    {basket?.length > 0 ?
                         <div className="basket_flex">
 
                             <div className="basket_content">
@@ -42,7 +30,7 @@ export default function BasketPage() {
                                 <div className="basket_list">
 
                                     {basket.map((e) => (
-                                        <BasketItem key={e.id} product={e}/>
+                                        <BasketItem key={e.id} product={e} setBasket={setBasket}/>
                                     ))}
                                     
                                 </div>

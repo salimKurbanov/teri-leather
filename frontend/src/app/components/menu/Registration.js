@@ -113,7 +113,16 @@ export default function Registration() {
 
       if (error.first_name == 'OK' && error.email == 'OK' && error.password == 'OK' && error.tel == 'OK' && error.last_name == 'OK' && error.confPassword == 'OK') {
         Auth.registration(input, setMsg)
-        console.log('ok')
+        document.getElementById('login_loader').classList.add('active')
+      } else {
+        setError({
+          email: "Обязательное поле",
+          first_name: "Обязательное поле",
+          last_name: "Обязательное поле",
+          password: "Обязательное поле",
+          confPassword: "Обязательное поле",
+          tel: "Обязательное поле",
+        })
       }
     }
 
@@ -144,7 +153,12 @@ export default function Registration() {
                 <input type="tel" name="tel" className={`form_input ${error.tel && error.tel != 'OK' ? 'error_input': ''}`} value={input.tel} placeholder='Введите номер телефона' onBlur={(e) => validateInput(e.target)} onChange={(e) => onInputChange(e.target)}/>
                 {error.email && error.tel != 'OK' ? <p className='error'>{error.tel}</p>: <></>}
 
-                <button className='regBtn main_button' type="submit">Зарегистрироваться</button>
+                <button className='regBtn main_button' type="submit">
+                  Зарегистрироваться
+                  <svg id="login_loader">
+                    <circle className="circle_login" cx={'50%'} cy={'50%'} r={'8px'}></circle>
+                  </svg>
+                </button>
             </form>
         </div>
     );

@@ -3,7 +3,6 @@ import './styles/style.scss';
 import Header from "./components/Header";
 import Footer from "./components/footer/Footer";
 import Aside from "./components/Aside";
-import SideMenu from "./components/menu/SideMenu";
 import Message from "./components/Message";
 
 const inter = Comfortaa({ subsets: ["latin"], display: "swap", });
@@ -19,7 +18,6 @@ export default function RootLayout({ children }) {
     <html lang="ru">
       <body className={inter.className}>
           <Aside />
-          <SideMenu />
           <Header/>
           <Message />
           {children}

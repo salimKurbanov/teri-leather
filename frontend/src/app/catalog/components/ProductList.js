@@ -5,32 +5,34 @@ import Api from "@/Api/Api"
 import BasketAddBtn from "@/app/components/BasketAddBtn"
 
 async function getProductList(category) {
-    const res = await fetch(`${Api.url}api/product/catalog/${category}`, {next: { revalidate: 2 } })
+    let res = await fetch(`${Api.url}api/product/catalog/${category}`, {next: { revalidate: 2 } })
 
     if (!res.ok) {
-        return notFound()
+        return 'error'
     }
 
-    return res.json()
+    res = await res.json()
+    return res
 }
 
 export default async function ProductList({category}) {
 
     const productList = await getProductList(category)
 
-    if (productList.length == 0) {
+    if(productList === 'error' || productList?.length === 0) {
         return (
             <div className="not-products">
                 <p>Товаров по данной категории не найдено</p>
                 <Link href={'/catalog/all'} className="main_button">Все товары</Link>
             </div>
-        );
+        )
     }
 
     return (
         <div>
             <div className='product_list'>
-                {productList.map((el) => (
+                {productList?.length 
+                ? productList.map((el) => (
                     <div key={el.id} className='catalog_card'>
                         
                         <Link href={`/catalog/detail/${el.slug}`} className="image_link">
@@ -58,7 +60,8 @@ export default async function ProductList({category}) {
                             <BasketAddBtn id={el.id} price={(el.total_price).toFixed(2)}/>
                         </div>
                     </div>
-                ))}
+                )) 
+                :<></>}
             </div>
         </div>
     );

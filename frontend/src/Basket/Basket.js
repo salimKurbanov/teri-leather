@@ -1,4 +1,5 @@
 import Api from "@/Api/Api"
+import Store from "@/store/Store"
 
 const Basket = {}
 
@@ -12,7 +13,34 @@ Basket.set = (basket) => {
     localStorage.setItem('basket', JSON.stringify(basket))
 }
 
-Basket.getApi = (callback) => {
+Basket.getApi = async () => {
+    let localBasket = Basket.get()
+    let basket = []
+
+    if (localBasket) {
+        for(let i of localBasket) {
+            basket.push(i.id)
+        }
+    }
+    try {
+        let res = await fetch(`${Api.url}api/product/basket/${JSON.stringify(basket)}`, {cache: 'no-cache'})
+
+        if(!res.ok) {
+            return 'error'
+        }
+
+        res = await res.json()
+
+        return res
+    }
+    catch(e) {
+        console.log(e)
+        return 'error'
+    }
+    
+}
+
+Basket.updateApi = async () => {
     let localBasket = Basket.get()
     let basket = []
 
@@ -22,10 +50,25 @@ Basket.getApi = (callback) => {
         }
     }
 
-    fetch(`${Api.url}api/product/basket/${JSON.stringify(basket)}`)
-    .then(res => res.json())
-    .then(data => callback(data))
-    .catch(error => console.log(error))
+    try {
+        let res = await fetch(`${Api.url}api/product/basket/${JSON.stringify(basket)}`, {cache: 'no-cache'})
+
+        if(!res.ok) {
+            return 'error'
+        }
+
+        res = await res.json()
+        
+        Store.setListener('updateBasketMenu', res)
+
+        return
+    }
+    catch(e) {
+        console.log(e)
+        return 'error'
+    }
+
+    
 }
 
 Basket.add = (el_id, price) => {

@@ -5,31 +5,32 @@ import './css/components.scss'
 import Logo from './../../../public/LogoTeri_orange.png'
 import Image from 'next/image';
 import Store from './../../store/Store.js';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import ManiCount from './MainCount';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
+import SideMenu from './menu/SideMenu';
 
 const Aside = () => {
 
-    let path = usePathname()
+    const path = usePathname()
+    const btn = useRef(null)
+    const menu = useRef(null)
 
-    const [btn, setBtn] = useState('')
-
-    function modalValue(e, el) {
-        const sideMenu = document.querySelector('.side_menu')
+    const modalValue = (e, el) => {
         Store.setListener('modal', el)
-        if(btn === e.target && sideMenu.classList.contains('active')) {
-            sideMenu.classList.remove('active')
+        if(btn.current === e.target && menu.current?.classList.contains('active')) {
+            Store.setListener('openMenu', false)
             document.body.style.overflow = 'visible'
         } else {
-            sideMenu.classList.add('active')
+            Store.setListener('openMenu', true)
             document.body.style.overflow = 'hidden'
-            setBtn(e.target)
+            btn.current = e.target
         }
     }
 
     return (
+        <>
             <div className='aside' onClick={(e) => e.stopPropagation()}>
                 <nav>
                     {path == '/basket' ? 
@@ -54,6 +55,10 @@ const Aside = () => {
                 
                 <Image src={Logo} alt="Teri Leather" placeholder='blur' className='logo_aside'/>
             </div>
+
+            <SideMenu menu={menu}/>
+        </>
+            
     );
 };
 

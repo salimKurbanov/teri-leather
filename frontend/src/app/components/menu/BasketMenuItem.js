@@ -1,66 +1,40 @@
 import Basket from "@/Basket/Basket"
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import Store from "@/store/Store"
-import { usePathname } from "next/navigation"
 
 
 export default function BasketMenuItem({product}) {
 
-    let [count, setCount] = useState(1)
-
-    let path = usePathname() 
+    const [count, setCount] = useState(1)
+    const item = useRef(null)
 
     useEffect(() => {
-        let basket = JSON.parse(localStorage.getItem('basket'))
 
-        setCount(basket.find(({id}) => id === product.id).count)
-
-    }, [])
-
-    function removeBasketItem(id) {
-        const items = document.querySelector(`[data-menuid='${id}']`)
-
-        items.classList.add('red')
-        setTimeout(() => {
-            items.classList.add('remove')
-        }, 500)
-        setTimeout(() => {
-            items.classList.add('height')
-        }, 1300)
-        setTimeout(() => {
-            items.remove()
-        }, 2500)
-       
-        Basket.remove(id)
-
-        const countBasket = Basket.count()
-
-        Store.setListener('count_main', countBasket)
-
-        let p = document.createElement('p')
-        p.textContent = 'Товар удалён из корзины'
-        document.getElementById('main_message').append(p)
-
-        setTimeout(() => {
-            p.classList.add('remove')
-            setTimeout(() => {
-                p.remove()
-            }, 1500)
-        }, 3000)
-
-        if(countBasket === 0) {
-            setTimeout(() => {
-                Store.setListener('rerend', prev => !prev)
-            }, 3001)
+        let basket = JSON.parse(localStorage.getItem('basket')) || false
+        if (product && basket) {
+            const foundItem = basket.find(({ id }) => id === product.id)
+            if (foundItem) {
+                setCount(foundItem.count)
+            }
         }
 
+    }, [product])
+
+    const removeBasketItem = async (id) => {
+        Basket.remove(id)
+        let res = await Basket.updateApi()
+        if(res === 'error') {
+            return
+        }
+        Store.setListener('count_main', Basket.count())
+        Store.sendMessage('Товар удалён из корзины')
     }
 
     return (
         <>
-            <div className="basket_item_wrapper" data-menuid={product.id}>
+            <div className="basket_item_wrapper"  ref={item}>
                 <div className="basket_menu_item" >
                     <span className="cross main_cross" onClick={() => removeBasketItem(product.id)}></span>
                     <Link href={`/catalog/detail/${product.slug}`} className="link_image">

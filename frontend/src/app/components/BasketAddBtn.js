@@ -4,21 +4,18 @@ import Store from "@/store/Store";
 
 export default function BasketAddBtn({id, price}) {
 
-    function addProduct() {
-        let p = document.createElement('p')
-        p.textContent = 'Товар добавлен в корзину'
-        document.getElementById('main_message').append(p)
+    const addProduct = async () => {
         Basket.add(id, price)
+        let res = await Basket.updateApi()
 
-        setTimeout(() => {
-            p.classList.add('remove')
-            setTimeout(() => {
-                p.remove()
-            }, 1500)
-        }, 3000)
+        if (res === 'error') {
+            Basket.remove(id)
+            Store.sendMessage('Не удалось выполнить запрос')
+            return
+        }
         
+        Store.sendMessage('Товар добавлен в корзину')
         Store.setListener('count_main', Basket.count())
-        Store.setListener('rerend', prev => !prev)
     }
 
     return (
